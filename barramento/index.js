@@ -10,7 +10,7 @@ app.post('/eventos', async (req, res) => {
     eventos.push(evento)
     console.log(evento)
 
-    if (evento.type === 'ObservacaoClassificada') {
+    if (evento.type === 'ObservacaoClassificada' || 'LembreteCriado') {
         try {
             await axios.post('https://localhost:4000/eventos', evento)
         } catch (e) {
@@ -22,7 +22,7 @@ app.post('/eventos', async (req, res) => {
         } catch (e) {
         }
     }
-    if (evento.type === 'ObservacaoCriada') {
+    if (evento.type === 'ObservacaoClassificada') {
         try {
             await axios.post('https://localhost:7000/eventos', evento)
         } catch (e) {

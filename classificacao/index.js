@@ -20,6 +20,22 @@ const funcoes = {
     }
 }
 
+LembreteCriado: async(lembrete) => {
+    if(lembrete.texto.toLowerCase().includes('urgente')) {
+        lembrete.status = 'urgente';
+    } else if (lembrete.texto.toLowerCase().includes('importante')) {
+        lembrete.status = 'comum';
+    }
+    await axios.post(
+        'https://localhost:10000/eventos',
+        {
+            type: 'LembreteClassificado',
+            payload: lembrete
+        }
+    )
+    console.log('classifiquei lembrete')
+}
+
 app.post('/eventos', async (req, res) => {
     try{
         funcoes[req.body.type](req.body.payload)
